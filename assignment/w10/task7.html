@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<TITLE> Table with Images and Alternating Row Background Color</TITLE>
+<STYLE>
+        table {
+            border-collapse: collapse;
+            font-family: Times New Roman, sans-serif;
+        }
+        th {
+            background-color: #00FFFF;
+            color: white;
+            text-align: left;
+            padding: 8px;
+        }
+        td {
+            text-align: left;
+            padding: 8px;
+            width: 80px; /* add this line */
+        }
+        tr:nth-child(even) {
+            background-color: #ADFF2F;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+        }
+</STYLE>
+</HEAD>
+<BODY>
+
+    <table>
+        <thead>
+            <tr>
+                <th>SN</th>
+                <th>Name</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Putali</td>
+                <td><img src="images/putali.jpg" alt="Putali"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Hemp</td>
+                <td><img src="images/hemp.jpg" alt="Hemp"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Bu</td>
+                <td><img src="images/bu.jpg" alt="Bu"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Com</td>
+                <td><img src="images/com.jpg" alt="Com"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const tableRows = document.querySelectorAll("tbody tr");
+
+        for (let i = 0; i < tableRows.length; i++) {
+            if (i % 2 == 0) {
+                tableRows[i].style.backgroundColor = "#00f3ff";
+            }
+        }
+    </script>
+
+</BODY>
+</HTML>
