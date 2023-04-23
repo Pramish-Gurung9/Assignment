@@ -50,3 +50,12 @@ function confirmDonation() {
     }, 3000);
   }
 }
+
+function sendEmail() {
+  // Prompt the user to confirm sending the email
+  if (confirm("Are you sure you want to send this email?")) {
+    // If the user confirms, open the mailbox
+    window.location.href = "mailto:user@example.com";
+  }
+}
+
