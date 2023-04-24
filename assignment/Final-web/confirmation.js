@@ -2,12 +2,12 @@ function confirmDonation() {
   const confirmed = confirm('Are you sure you want to donate?');
   if (confirmed) {
     const amount = parseFloat(prompt('Please enter the donation amount:'));
-    
+
     if (isNaN(amount) || amount <= 0) {
       alert('Invalid donation amount. Please enter a valid number.');
       return;
     }
-    
+
     const id = prompt('Please enter your eSewa ID:');
 
     if (id === null || id === '') {
@@ -15,41 +15,48 @@ function confirmDonation() {
       return;
     }
 
-    const encodedAmount = encodeURIComponent(amount);
-    const encodedId = encodeURIComponent(id);
-
-    // Display thank you message
-    const thankYouMessage = document.createElement('div');
-    thankYouMessage.innerHTML = '<h1>Thank you for your donation!</h1>';
-    thankYouMessage.style.position = 'fixed';
-    thankYouMessage.style.top = 0;
-    thankYouMessage.style.left = 0;
-    thankYouMessage.style.width = '100%';
-    thankYouMessage.style.height = '100%';
-    thankYouMessage.style.backgroundColor = 'white';
-    thankYouMessage.style.backgroundImage = 'url("images/logo.png")';
-    thankYouMessage.style.backgroundRepeat = 'no-repeat';
-    thankYouMessage.style.backgroundSize = 'contain';
-    thankYouMessage.style.backgroundPosition = 'center';
-    thankYouMessage.style.display = 'flex';
-    thankYouMessage.style.justifyContent = 'center';
-    thankYouMessage.style.alignItems = 'center';
-    document.body.appendChild(thankYouMessage);
-
-    // Set font-size to fill screen
-    const h1 = thankYouMessage.querySelector('h1');
-    const lineHeight = parseFloat(getComputedStyle(h1).lineHeight);
-    const height = thankYouMessage.offsetHeight;
-    const fontSize = (height / lineHeight) * 0.8; // adjust as needed
-    h1.style.fontSize = `${fontSize}vh`;
+    // Open new page with thank you message and logo
+    const thankYouPage = window.open('', '_blank');
+    thankYouPage.document.write(`
+      <html>
+        <head>
+          <title>Thank you for your donation</title>
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+              height: 100vh;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: white;
+              background-image: url("images/logo.png");
+              background-repeat: no-repeat;
+              background-size: contain;
+              background-position: center;
+            }
+            h1 {
+              font-size: 10vh;
+              text-align: center;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Thank you for your donation!</h1>
+        </body>
+      </html>
+    `);
 
     // Redirect to eSewa page after 3 seconds
     setTimeout(() => {
+      const encodedAmount = encodeURIComponent(amount);
+      const encodedId = encodeURIComponent(id);
       const url = `https://esewa.com.np/#/sc=9803514141&su=Donation%20to%20Legend's%20Rescue&amt=${encodedAmount}&pid=${encodedId}`;
-      window.open(url, '_blank');
+      thankYouPage.location.href = url;
     }, 3000);
   }
 }
+
 
 function sendEmail() {
   // Prompt the user to confirm sending the email
